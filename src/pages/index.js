@@ -1,8 +1,12 @@
 import Head from "next/head";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { signOut } from "next-auth/react";
 
-export default function Home() {
+/** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
+export default function Home(props) {
   return (
-    <>
+    <div className="bg-black text-white h-screen w-screen">
       <Head>
         <title>Notelist</title>
         <meta
@@ -13,10 +17,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        <div className="">
-          <h1 className="text-xl font-semibold">home</h1>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl text-center font-bold">home</h1>
+          <button className="border p-2 rounded-lg" onClick={() => signOut()}>
+            Sign Out
+          </button>
         </div>
       </main>
-    </>
+    </div>
   );
+}
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/api/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
 }
