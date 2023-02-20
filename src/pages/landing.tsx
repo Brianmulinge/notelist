@@ -2,10 +2,9 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Header from "../components/Header";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 function landing() {
-  const { data: session } = useSession();
   return (
     <div className="h-full w-full">
       <Header />
