@@ -1,7 +1,9 @@
+import { getServerSession } from "next-auth/next";
 import Head from "next/head";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import NoteItem from "../components/NoteItem";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 export default function Home() {
   return (
@@ -24,4 +26,23 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/landing",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }

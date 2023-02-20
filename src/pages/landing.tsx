@@ -2,8 +2,10 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Header from "../components/Header";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 
 function landing() {
+  const { data: session } = useSession();
   return (
     <div className="h-full w-full">
       <Header />
@@ -17,7 +19,10 @@ function landing() {
         <h1 className="font-bold text-3xl">
           Welcome to Notelist, an auto delete note taking app.
         </h1>
-        <button className="my-4 border rounded-full px-6 py-2 font-semibold border-gray-800">
+        <button
+          onClick={() => signIn()}
+          className="my-4 border rounded-full px-6 py-2 font-semibold border-gray-800"
+        >
           Sign in to get started.
         </button>
       </div>
