@@ -2,7 +2,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Header() {
   const { data: session } = useSession();
-  if (session) {
+  if (!session) {
     return (
       <>
         <div className="h-14 border-b flex items-center justify-between px-10">
@@ -11,10 +11,10 @@ export default function Header() {
           </div>
           <div>
             <button
-              onClick={() => signIn}
+              onClick={() => signIn()}
               className="border rounded-full px-6 py-2 font-semibold border-gray-800"
             >
-              Sign Out
+              Sign In
             </button>
           </div>
         </div>
@@ -29,10 +29,10 @@ export default function Header() {
         </div>
         <div>
           <button
-            onClick={() => signOut}
+            onClick={() => signOut()}
             className="border rounded-full px-6 py-2 font-semibold border-gray-800"
           >
-            Sign In
+            Sign Out
           </button>
         </div>
       </div>

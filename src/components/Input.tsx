@@ -2,7 +2,7 @@ import React from "react";
 
 function Input() {
   return (
-    <div className=" p-4 rounded-lg border mx-12 my-4">
+    <div className=" p-4 rounded-lg border mx-12 my-4 relative">
       <form>
         <h1 className="text-center font-semibold text-xl py-2">
           Create New Note

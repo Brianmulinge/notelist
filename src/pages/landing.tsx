@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Header from "../components/Header";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
 function landing() {
   return (
