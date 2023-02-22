@@ -20,7 +20,7 @@ export default function Home() {
       <main className="">
         <Header />
         <Input />
-        <div className="p-12 grid justify-items-center gap-4 auto-cols-auto md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="p-6 grid justify-items-center gap-4 auto-cols-auto md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <NoteItem />
         </div>
       </main>
@@ -30,7 +30,6 @@ export default function Home() {
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
-
   if (!session) {
     return {
       redirect: {

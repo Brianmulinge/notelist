@@ -1,8 +1,8 @@
 import React from "react";
 
-function Input() {
+export default function Input() {
   return (
-    <div className=" p-4 rounded-lg border mx-12 my-4 relative">
+    <div className=" p-4 rounded-lg border mx-6 my-4">
       <form>
         <h1 className="text-center font-semibold text-xl py-2">
           Create New Note
@@ -18,5 +18,3 @@ function Input() {
     </div>
   );
 }
-
-export default Input;

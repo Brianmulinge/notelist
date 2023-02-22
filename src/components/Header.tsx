@@ -5,7 +5,7 @@ export default function Header() {
   if (!session) {
     return (
       <>
-        <div className="h-14 border-b flex items-center justify-between px-10">
+        <div className="h-14 border-b flex items-center justify-between px-6">
           <div>
             <h1 className="font-semibold text-2xl">Notelist</h1>
           </div>
@@ -23,7 +23,7 @@ export default function Header() {
   }
   return (
     <>
-      <div className="h-14 border-b flex items-center justify-between px-10">
+      <div className="h-14 border-b flex items-center justify-between px-6">
         <div>
           <h1 className="font-semibold text-2xl">Notelist</h1>
         </div>

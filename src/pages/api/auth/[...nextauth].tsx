@@ -14,22 +14,29 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
     // ...add more providers here
   ],
 
   //callbacks
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({}) {
       return true;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       return baseUrl;
     },
-    async session({ session, user, token }) {
+    async session({ session }) {
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token }) {
       return token;
     },
   },
