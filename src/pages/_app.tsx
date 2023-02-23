@@ -1,11 +1,12 @@
-import { AppProps } from "next/app";
+import { AppType } from "next/app";
 import "../styles/globals.css";
 import { Inter } from "@next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { trpc } from "../utils/trpc";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: AppType = ({ Component, pageProps }) => {
   return (
     <main className={inter.className}>
       <SessionProvider session={pageProps.session}>
@@ -13,4 +14,5 @@ export default function App({ Component, pageProps }: AppProps) {
       </SessionProvider>
     </main>
   );
-}
+};
+export default trpc.withTRPC(App);
