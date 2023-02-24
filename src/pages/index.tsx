@@ -4,13 +4,8 @@ import Header from "../components/Header";
 import Input from "../components/Input";
 import NoteItem from "../components/NoteItem";
 import { authOptions } from "./api/auth/[...nextauth]";
-import { trpc } from "../utils/trpc";
 
 export default function Home() {
-  const hello = trpc.hello.useQuery({ text: "client" });
-  if (!hello.data) {
-    return <div>Loading...</div>;
-  }
   return (
     <div className="">
       <Head>
@@ -26,7 +21,6 @@ export default function Home() {
         <Header />
         <Input />
         <div className="p-6 grid justify-items-center gap-4 auto-cols-auto md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          <p>{hello.data.greeting}</p>
           <NoteItem />
         </div>
       </main>
