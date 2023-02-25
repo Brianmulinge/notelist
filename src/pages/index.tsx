@@ -5,6 +5,8 @@ import Input from "../components/Input";
 import NoteItem from "../components/NoteItem";
 import { authOptions } from "./api/auth/[...nextauth]";
 
+import { trpc } from "../utils/trpc";
+
 export default function Home() {
   return (
     <div className="">
