@@ -22,9 +22,6 @@ export default function Home() {
         <Input />
         <div className="p-6 grid justify-items-center gap-4 auto-cols-auto md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <NoteItem />
-          <NoteItem />
-          <NoteItem />
-          <NoteItem />
         </div>
       </main>
     </div>
