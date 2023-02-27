@@ -1,5 +1,7 @@
 {
     "githubPullRequests.ignoredPullRequestBranches": [
-        "main"
-    ]
+        "main",
+        "dev"
+    ],
+    "WillLuke.nextjs.hasPrompted": true
 }
