@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { trpc } from "../utils/trpc";
+import { useMutation } from "react-query";
 
 export default function Input() {
   return (
@@ -12,7 +13,10 @@ export default function Input() {
         <input className="border rounded-lg w-full p-2" />
         <label className="block font-semibold">Description</label>
         <textarea className="border rounded-lg w-full p-2" />
-        <button className="border rounded-full px-6 py-2 font-semibold border-gray-800">
+        <button
+          type="submit"
+          className="border rounded-full px-6 py-2 font-semibold border-gray-800"
+        >
           Add Note
         </button>
       </form>

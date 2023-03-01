@@ -6,13 +6,10 @@ import { env } from '../../../../src/env.mjs';
 export default createNextApiHandler({
   router: appRouter,
   createContext,
-  onError: 
-  env.NODE_ENV === 'development'
-  ? ({path, error}) => {
-    console.error(`❌ tRPC failed on ${path ?? '<no-path>'}: ${error.message}`);
-  }
-: undefined,
+  onError({ error }) {
+    if (error.code === 'INTERNAL_SERVER_ERROR') {
+      // send to bug reporting
+      console.error('Something went wrong', error);
+    }
+  },
 });
-
-
-

@@ -1,45 +1,66 @@
-import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { router, protectedProcedure } from '../context';
+import { baseProcedure, router } from '../trpc';
 
 export const noteRouter = router({
-  get: protectedProcedure
-    .input(z.object({ order: z.enum(['desc', 'asc']) }))
-    .mutation(async ({ ctx, input: { order } }) => {
-      try {
-        const notes = await ctx.prisma.note.findMany({
-          where: { userId: ctx.session.user.id },
-          orderBy: { createdAt: order },
-          select: { title: true, content: true }
-        });
-        return notes;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
+  all: baseProcedure.query(({ ctx }) => {
+    const userId = ctx.session.userId; // assume user ID is stored in session
+    return ctx.task.findMany({
+      where: { userId },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+  }),
+  add: baseProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
+        title: z.string().min(1),
+        content: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.userId; // assume user ID is stored in session
+      const note = await ctx.task.create({
+        data: {
+          title: input.title,
+          content: input.content,
+          userId,
+        },
+      });
+      return note;
     }),
-  create: protectedProcedure
-    .input(z.object({ title: z.string().max(200), content: z.string().max(200) }))
-    .mutation(async ({ ctx, input: { title, content } }) => {
-      try {
-        const note = await ctx.prisma.note.create({
-          data: { title, content, userId: ctx.session.user.id ?? '' },
-        });
-        return note;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
+  edit: baseProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        data: z.object({
+          title: z.string().min(1).optional(),
+          content: z.string().min(1).optional(),
+          completed: z.boolean().optional(),
+        }),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id, data } = input;
+      const userId = ctx.session.userId; // assume user ID is stored in session
+      const note = await ctx.task.update({
+        where: { id, userId },
+        data,
+      });
+      return note;
     }),
-  delete: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .mutation(async ({ ctx, input: { id } }) => {
-      try {
-        const deletedNote = await ctx.prisma.note.delete({ where: { id } });
-        return deletedNote;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
+  delete: baseProcedure
+    .input(z.string().uuid())
+    .mutation(async ({ ctx, input: id }) => {
+      const userId = ctx.session.userId; // assume user ID is stored in session
+      await ctx.task.delete({ where: { id, userId } });
+      return id;
     }),
+  clearCompleted: baseProcedure.mutation(async ({ ctx }) => {
+    const userId = ctx.session.userId; // assume user ID is stored in session
+    await ctx.task.deleteMany({ where: { completed: true, userId } });
+
+    return ctx.task.findMany({ where: { userId } });
+  }),
 });

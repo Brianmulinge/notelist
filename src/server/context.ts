@@ -1,9 +1,11 @@
 import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
 import SuperJSON from 'superjson';
-import { getServerAuthSession } from '../pages/api/auth/[...nextauth]';
-import { initTRPC, TRPCError } from '@trpc/server';
 import { prisma } from '../../prisma/lib/prismadb';
+import { getServerAuthSession } from '../pages/api/auth/[...nextauth]';
+import { TRPCError, initTRPC } from '@trpc/server';
 
+// create context based of incoming request
+// set as optional here so it can also be re-used for `getStaticProps()`
 export const createContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
