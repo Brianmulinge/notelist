@@ -3,7 +3,6 @@ import "../styles/globals.css";
 import { Inter } from "@next/font/google";
 import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
-import { trpc } from "../utils/trpc";
 
 const App: AppType = ({ Component, pageProps }: AppProps) => {
   return (
@@ -15,4 +14,4 @@ const App: AppType = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default trpc.withTRPC(App);
+export default App;
