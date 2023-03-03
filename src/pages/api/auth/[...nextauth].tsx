@@ -2,7 +2,6 @@ import type { NextAuthOptions, DefaultSession } from "next-auth";
 import type { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { env } from "../../../env.mjs";
 import prisma from "../../../../prisma/lib/prismadb";
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
@@ -28,8 +27,8 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: env.GOOGLE_ID,
-      clientSecret: env.GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
 };
