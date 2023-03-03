@@ -24,6 +24,9 @@ export const authOptions: NextAuthOptions = {
       return baseUrl;
     },
   },
+
+  secret: process.env.SECRET,
+
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
