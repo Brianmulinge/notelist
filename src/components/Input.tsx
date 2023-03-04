@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { trpc } from "../utils/trpc";
-import { useMutation } from "react-query";
 
 export default function Input() {
   return (
