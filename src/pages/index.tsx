@@ -9,8 +9,6 @@ import { trpc } from "../utils/trpc";
 export default function Home() {
   const notes = trpc.note.getNote.useQuery();
 
-  const deleteNote = trpc.note.deleteNote.useMutation();
-
   return (
     <div className="">
       <Head>

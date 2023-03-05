@@ -66,13 +66,15 @@ export const noteRouter = router({
 
 
   deleteNote: protectedProcedure
-    .input(z.string().uuid())
+    .input(z.string())
     .mutation(async ({ ctx, input: id }) => {
       // Get the userId from the session
       await ctx.prisma.note.delete({
         where: {
           id,
-          // Verify that the note belongs to the authenticated user
+
+
+
         },
       });
       return id;
