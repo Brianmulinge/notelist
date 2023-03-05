@@ -10,7 +10,7 @@ export const noteRouter = router({
         userId, // Only retrieve notes belonging to the authenticated user
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
     return notes;

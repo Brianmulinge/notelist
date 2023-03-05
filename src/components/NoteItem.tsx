@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { trpc } from "../utils/trpc";
 
-function NoteItem(
-  { note }: { note: { title: string; content: string } },
-  handleDelete: () => void
-) {
+function NoteItem({ note }: { note: { title: string; content: string } }) {
   return (
     <div className="border rounded-lg h-full w-full p-4">
       <div className="">
