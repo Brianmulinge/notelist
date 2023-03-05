@@ -1,8 +1,21 @@
-import React, { useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { trpc } from "../utils/trpc";
 
-function NoteItem({ note }: { note: { title: string; content: string } }) {
+export default function NoteItem({
+  note,
+}: {
+  note: {
+    id: string;
+    title: string;
+    content: string;
+  };
+}) {
+  const { mutate: deleteNote } = trpc.note.deleteNote.useMutation({});
+
+  const handleDelete = async () => {
+    const result: any = await deleteNote(note.id);
+  };
+
   return (
     <div className="border rounded-lg h-full w-full p-4">
       <div className="">
@@ -10,10 +23,10 @@ function NoteItem({ note }: { note: { title: string; content: string } }) {
         <h1>{note.content}</h1>
       </div>
       <div className="flex justify-end p-2">
-        <TrashIcon className="h-8 w-8 cursor-pointer" />
+        <button onClick={handleDelete}>
+          <TrashIcon className="h-6 w-6" />
+        </button>
       </div>
     </div>
   );
 }
-
-export default NoteItem;
