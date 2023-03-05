@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { trpc } from "../utils/trpc";
 
 function NoteItem() {
   return (
     <div className="border rounded-lg h-full w-full p-4">
       <div className="">
-        <h1 className="font-semibold text-lg py-2">Optimizing Fonts</h1>
+        <h1 className="font-semibold text-lg py-2">title</h1>
         <h1>
           This new font system also allows you to conveniently use all Google
           Fonts with performance and privacy in mind. CSS and font files are
