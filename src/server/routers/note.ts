@@ -17,15 +17,41 @@ export const noteRouter = router({
   }),
 
   addNote: protectedProcedure
+  .input(
+    z.object({
+      title: z.string(),
+      content: z.string(),
+    })
+  )
+  .mutation(async ({ input, ctx }) => {
+    const  userId  = ctx.session.user.id; // Get the userId from the session
+    const note = await ctx.prisma.note.create({
+      data: {
+        ...input,
+        user: {
+          connect: {
+            id: userId,
+        },
+      },
+    },
+    });
+    return note;
+  }),
+
+  updateNote: protectedProcedure
     .input(
       z.object({
+        id: z.string().uuid(),
         title: z.string(),
         content: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const { id: userId } = ctx.session.user; // Get the userId from the session
-      const note = await ctx.prisma.note.create({
+      const note = await ctx.prisma.note.update({
+        where: {
+          id: input.id,
+        },
         data: {
           ...input,
           user: {
@@ -38,34 +64,15 @@ export const noteRouter = router({
       return note;
     }),
 
-  updateNote: protectedProcedure
-    .input(
-      z.object({
-        id: z.string().uuid(),
-        title: z.string(),
-        content: z.string(),
-      })
-    )
-    .mutation(async ({ input, ctx }) => {
-      // Get the userId from the session
-      const note = await ctx.prisma.note.update({
-        where: {
-          id: input.id,
-           // Verify that the note belongs to the authenticated user
-        },
-        data: input,
-      });
-      return note;
-    }),
 
   deleteNote: protectedProcedure
     .input(z.string().uuid())
     .mutation(async ({ ctx, input: id }) => {
-  // Get the userId from the session
+      // Get the userId from the session
       await ctx.prisma.note.delete({
         where: {
           id,
-           // Verify that the note belongs to the authenticated user
+          // Verify that the note belongs to the authenticated user
         },
       });
       return id;

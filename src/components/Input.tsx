@@ -5,15 +5,13 @@ export default function Input() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const postNote = trpc.note.addNote.useMutation();
+  const createNote = trpc.note.addNote.useMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postNote.mutate({ title, content });
+    createNote.mutate({ title, content });
     setTitle("");
     setContent("");
-
-    console.log(title, content);
   };
 
   return (
@@ -35,6 +33,7 @@ export default function Input() {
           className="border rounded-lg w-full p-2"
         />
         <button
+          disabled={!title || !content}
           type="submit"
           className="border rounded-full px-6 py-2 font-semibold border-gray-800"
         >
