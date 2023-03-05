@@ -1,60 +1,84 @@
-import { z } from 'zod';
-import { baseProcedure, router } from '../trpc';
+import { z } from "zod";
+import { protectedProcedure, router } from "../trpc";
+
 
 export const noteRouter = router({
-  all: baseProcedure.query(({ ctx }) => {
-    return ctx.note.findMany({
+  getNote: protectedProcedure.query(async ({ ctx }) => {
+    const userId = ctx.session.user.id; // Get the userId from the session
+    const notes = await ctx.prisma.note.findMany({
+      where: {
+        userId, // Only retrieve notes belonging to the authenticated user
+      },
       orderBy: {
-        createdAt: 'asc',
+        createdAt: "desc",
       },
     });
+    return notes;
   }),
-  add: baseProcedure
+
+  addNote: protectedProcedure
   .input(
     z.object({
-      id: z.string().optional(),
-      title: z.string().min(1),
-      content: z.string().min(1),
-      userId: z.string().uuid(),
-    }),
+      title: z.string(),
+      content: z.string(),
+    })
   )
-  .mutation(async ({ ctx, input }) => {
-    const note = await ctx.note.create({
+  .mutation(async ({ input, ctx }) => {
+    const  userId  = ctx.session.user.id; // Get the userId from the session
+    const note = await ctx.prisma.note.create({
       data: {
-        title: input.title,
-        content: input.content,
-        user: { connect: { id: input.userId } },
+        ...input,
+        user: {
+          connect: {
+            id: userId,
+        },
       },
-    });
-    return note;
-  }),
-  
-  edit: baseProcedure
-  .input(
-    z.object({
-      id: z.string().uuid(),
-      data: z.object({
-        title: z.string().min(1).optional(),
-        content: z.string().min(1).optional(),
-        userId: z.string().uuid().optional(),
-      }),
-    }),
-  )
-  .mutation(async ({ ctx, input }) => {
-    const { id } = input;
-    const { title, content, userId } = input.data;
-    const note = await ctx.note.update({
-      where: { id },
-      data: {
-        // Update existing fields
-        title: title,
-        content: content,
-        // Update new fields
-        user: userId ? { connect: { id: userId } } : undefined,
-      },
+    },
     });
     return note;
   }),
 
+  updateNote: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        title: z.string(),
+        content: z.string(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { id: userId } = ctx.session.user; // Get the userId from the session
+      const note = await ctx.prisma.note.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          ...input,
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      });
+      return note;
+    }),
 
+
+  deleteNote: protectedProcedure
+    .input(z.string().uuid())
+    .mutation(async ({ ctx, input: id }) => {
+      // Get the userId from the session
+      await ctx.prisma.note.delete({
+        where: {
+          id,
+          // Verify that the note belongs to the authenticated user
+        },
+      });
+      return id;
+    }),
 });
+
+
+// export type definition of API
+export type NoteRouter = typeof noteRouter;
