@@ -20,7 +20,9 @@ export const noteRouter = router({
   .input(
     z.object({
       title: z.string(),
-      content: z.string(),
+      content: z.string(
+        z.string().min(1, "Content must be at least 1 character long").max(5000, "Content must be at most 5000 characters long")
+      ),
     })
   )
   .mutation(async ({ input, ctx }) => {

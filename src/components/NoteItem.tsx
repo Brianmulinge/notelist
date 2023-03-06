@@ -14,6 +14,7 @@ export default function NoteItem({
 
   const handleDelete = async () => {
     const result: any = await deleteNote(note.id);
+    window.location.reload();
   };
 
   return (
