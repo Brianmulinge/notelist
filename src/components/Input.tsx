@@ -13,6 +13,9 @@ export default function Input() {
     setTitle("");
     setContent("");
   };
+  if (createNote.isSuccess) {
+    window.location.reload();
+  }
 
   return (
     <div className=" p-4 rounded-lg border mx-6 my-4">

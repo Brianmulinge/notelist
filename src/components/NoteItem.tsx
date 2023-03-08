@@ -13,7 +13,8 @@ export default function NoteItem({
   const { mutate: deleteNote } = trpc.note.deleteNote.useMutation({});
 
   const handleDelete = async () => {
-    const result: any = await deleteNote(note.id);
+    const result = await deleteNote(note.id);
+    window.location.reload();
   };
 
   return (
