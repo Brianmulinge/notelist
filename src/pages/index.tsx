@@ -5,9 +5,12 @@ import Input from "../components/Input";
 import NoteItem from "../components/NoteItem";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { trpc } from "../utils/trpc";
+import { PlusCircleIcon} from "@heroicons/react/24/outline";
+import { useState } from "react";
 
 export default function Home() {
   const notes = trpc.note.getNote.useQuery();
+  const [isOpen, setisOpen] = useState(false);
 
   return (
     <div className="">
@@ -22,12 +25,12 @@ export default function Home() {
       </Head>
       <main className="">
         <Header />
-        <Input />
         <div className="p-6 grid justify-items-center gap-4 auto-cols-auto md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {notes.data?.map((note) => {
             return <NoteItem key={note.id} note={note} />;
           })}
         </div>
+          <PlusCircleIcon onClick={()=>setisOpen(isOpen=>!isOpen)} className="fixed bottom-5 right-5 cursor-pointer h-16 w-16"/>
       </main>
     </div>
   );

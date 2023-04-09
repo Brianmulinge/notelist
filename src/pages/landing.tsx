@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 function landing() {
   return (
     <section
-    style={{}}
     className="h-screen w-screen flex flex-col justify-between">
       <section className="flex justify-between items-center h-14 px-4 border-b">
         <h1 className="font-semibold text-xl md:text-2xl md:font-bold lg:text-3xl">
@@ -36,7 +35,7 @@ function landing() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className="flex h-auto w-full justify-center">
-          <Image src={pic} className="p-8" alt="notes_svg" />
+          <Image priority src={pic} className="p-8" alt="notes_svg" />
         </motion.div>
       </section>
       <section className="border-t h-14 flex flex-col items-center justify-center">
