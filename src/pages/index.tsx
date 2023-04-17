@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth/next";
 import Head from "next/head";
 import Header from "../components/Header";
-import Input from "../components/Input";
 import NoteItem from "../components/NoteItem";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { trpc } from "../utils/trpc";
-import { PlusCircleIcon} from "@heroicons/react/24/outline";
 import { useState } from "react";
+import Addicon from "../components/Addicon";
+import Editor from "../components/Editor";
 
 export default function Home() {
   const notes = trpc.note.getNote.useQuery();
@@ -30,7 +30,8 @@ export default function Home() {
             return <NoteItem key={note.id} note={note} />;
           })}
         </div>
-          <PlusCircleIcon onClick={()=>setisOpen(isOpen=>!isOpen)} className="fixed bottom-5 right-5 cursor-pointer h-16 w-16"/>
+        <Editor />
+        <Addicon />
       </main>
     </div>
   );

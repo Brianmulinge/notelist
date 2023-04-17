@@ -29,7 +29,7 @@ function landing() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="font-bold text-5xl md:text-7xl lg:8xl text-transparent bg-clip-text bg-gradient-to-br from-gray-950 to-gray-400">
+          className="font-bold text-5xl md:text-7xl lg:8xl text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-950">
             Notelist
           </motion.h1>
           <motion.h1 
