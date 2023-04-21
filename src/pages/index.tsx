@@ -30,8 +30,8 @@ export default function Home() {
             return <NoteItem key={note.id} note={note} />;
           })}
         </div>
-        <Editor />
-        <Addicon />
+        <Editor isOpen={isOpen} />
+        <Addicon onAddIconClick={() => setisOpen(!isOpen)}/>
       </main>
     </div>
   );

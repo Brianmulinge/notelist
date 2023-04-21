@@ -2,12 +2,15 @@ import React from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { PlusIcon } from '@radix-ui/react-icons';
 
-const Addicon = () => {
+interface AddiconProps {
+  onAddIconClick: () => void;
+}
+const Addicon: React.FC<AddiconProps> = ({ onAddIconClick }) => {
   return (
     <Tooltip.Provider>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
-          <button className="fixed bottom-5 right-5 cursor-pointer h-14 w-14 text-violet11 shadow-blackA7 hover:bg-violet3 inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
+          <button onClick={onAddIconClick} className="fixed bottom-5 right-5 cursor-pointer h-12 w-12 text-violet11 shadow-blackA7 hover:bg-violet3 inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
             <PlusIcon />
           </button>
         </Tooltip.Trigger>
