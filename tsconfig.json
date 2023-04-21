@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/Editor.tsx", "src/components/Button.jsx", "src/components/Select.jsx", "src/components/Toolbar.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -5,9 +5,12 @@ import pic from "../assets/notes.svg";
 import { motion } from "framer-motion";
 
 function landing() {
+  const textVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8 } },
+  };
   return (
     <section
-    style={{}}
     className="h-screen w-screen flex flex-col justify-between">
       <section className="flex justify-between items-center h-14 px-4 border-b">
         <h1 className="font-semibold text-xl md:text-2xl md:font-bold lg:text-3xl">
@@ -21,22 +24,28 @@ function landing() {
         </button>
       </section>
       <section className="text-center mx-4 space-y-8">
-        <motion.div initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }} className="">
-          <h1 className="font-bold text-5xl md:text-7xl lg:8xl text-transparent bg-clip-text bg-gradient-to-br from-gray-950 to-gray-400">
+        <div  className="">
+          <motion.h1 
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          className="font-bold text-5xl md:text-7xl lg:8xl text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-950">
             Notelist
-          </h1>
-          <h1 className="font-bold text-3xl md:text-5xl lg:7xl text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-950">
+          </motion.h1>
+          <motion.h1 
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          className="font-bold text-3xl md:text-5xl lg:7xl text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-gray-950">
             The best way to keep your notes in check
-          </h1>
-        </motion.div>
+          </motion.h1>
+        </div>
         <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className="flex h-auto w-full justify-center">
-          <Image src={pic} className="p-8" alt="notes_svg" />
+          <Image priority src={pic} className="p-8" alt="notes_svg" />
         </motion.div>
       </section>
       <section className="border-t h-14 flex flex-col items-center justify-center">
