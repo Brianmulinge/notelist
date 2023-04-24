@@ -17,6 +17,7 @@ export default function Home() {
       <Head>
         <title>Notelist</title>
         <meta
+          title="Notelist"
           name="description"
           content="Created using Nextjs, Typescript, Tailwindcss, Prisma, Nextauth, Planetscale and Vercel"
         />

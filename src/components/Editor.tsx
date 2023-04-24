@@ -26,7 +26,7 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 ${visibilityStyle}`}
+        className={`fixed inset-0 bg-neutral-900 bg-opacity-70 ${visibilityStyle}`}
         style={{ backdropFilter: "blur(5px)" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -51,7 +51,7 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
               <button
                 disabled={!title || !content}
                 type="submit"
-                className="border rounded-full px-6 py-2 font-semibold border-gray-800"
+                className="border border-white rounded-full px-6 py-2 font-semibold "
               >
                 Add Note
               </button>
