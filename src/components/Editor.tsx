@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { trpc } from "../utils/trpc";
 
-
 interface EditorProps {
   isOpen: boolean;
 }
@@ -30,7 +29,9 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
         style={{ backdropFilter: "blur(5px)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`flex items-center h-full w-full justify-center ${visibilityStyle}`}>
+        <div
+          className={`flex items-center h-full w-full justify-center ${visibilityStyle}`}
+        >
           <div className="w-full h-auto p-4 rounded-lg border mx-6 my-4">
             <form onSubmit={handleSubmit}>
               <h1 className="text-center font-semibold text-xl py-2">

@@ -32,7 +32,7 @@ export default function Home() {
           })}
         </div>
         <Editor isOpen={isOpen} />
-        <Addicon onAddIconClick={() => setisOpen(!isOpen)}/>
+        <Addicon onAddIconClick={() => setisOpen(!isOpen)} />
       </main>
     </div>
   );

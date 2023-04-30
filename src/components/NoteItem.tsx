@@ -10,10 +10,10 @@ export default function NoteItem({
     content: string;
   };
 }) {
-  const { mutate: deleteNote } = trpc.note.deleteNote.useMutation({});
+  const { mutate: deleteNote } = trpc.note.deleteNote.useMutation();
 
   const handleDelete = async () => {
-    const result = await deleteNote(note.id);
+    await deleteNote(note.id);
     window.location.reload();
   };
 
