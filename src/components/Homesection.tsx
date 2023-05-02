@@ -1,131 +1,126 @@
-import {
-  createStyles,
-  Image,
-  Container,
-  Title,
-  Button,
-  Group,
-  Text,
-  List,
-  ThemeIcon,
-  rem,
-} from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
-import image from "../assets/notes.svg";
+import { Title, Text, Container, Button, Overlay, createStyles, rem } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
-  inner: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingTop: `calc(${theme.spacing.xl} * 4)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 4)`,
+  wrapper: {
+    position: 'relative',
+    paddingTop: rem(180),
+    paddingBottom: rem(130),
+    backgroundImage:
+      'url(https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+
+    [theme.fn.smallerThan('xs')]: {
+      paddingTop: rem(80),
+      paddingBottom: rem(50),
+    },
   },
 
-  content: {
-    maxWidth: rem(480),
-    marginRight: `calc(${theme.spacing.xl} * 3)`,
-
-    [theme.fn.smallerThan("md")]: {
-      maxWidth: "100%",
-      marginRight: 0,
-    },
+  inner: {
+    position: 'relative',
+    zIndex: 1,
   },
 
   title: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    fontWeight: 800,
+    fontSize: rem(40),
+    letterSpacing: rem(-1),
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
+    color: theme.white,
+    marginBottom: theme.spacing.xs,
+    textAlign: 'center',
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: rem(44),
-    lineHeight: 1.2,
-    fontWeight: 900,
 
-    [theme.fn.smallerThan("xs")]: {
+    [theme.fn.smallerThan('xs')]: {
       fontSize: rem(28),
-    },
-  },
-
-  control: {
-    [theme.fn.smallerThan("xs")]: {
-      flex: 1,
-    },
-  },
-
-  image: {
-    flex: 1,
-
-    [theme.fn.smallerThan("md")]: {
-      display: "none",
+      textAlign: 'left',
     },
   },
 
   highlight: {
-    position: "relative",
-    backgroundColor: theme.fn.variant({
-      variant: "light",
-      color: theme.primaryColor,
-    }).background,
-    borderRadius: theme.radius.sm,
-    padding: `${rem(4)} ${rem(12)}`,
+    color: theme.colors[theme.primaryColor][4],
+  },
+
+  description: {
+    color: theme.colors.gray[0],
+    textAlign: 'center',
+
+    [theme.fn.smallerThan('xs')]: {
+      fontSize: theme.fontSizes.md,
+      textAlign: 'left',
+    },
+  },
+
+  controls: {
+    marginTop: `calc(${theme.spacing.xl} * 1.5)`,
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
+
+    [theme.fn.smallerThan('xs')]: {
+      flexDirection: 'column',
+    },
+  },
+
+  control: {
+    height: rem(42),
+    fontSize: theme.fontSizes.md,
+
+    '&:not(:first-of-type)': {
+      marginLeft: theme.spacing.md,
+    },
+
+    [theme.fn.smallerThan('xs')]: {
+      '&:not(:first-of-type)': {
+        marginTop: theme.spacing.md,
+        marginLeft: 0,
+      },
+    },
+  },
+
+  secondaryControl: {
+    color: theme.white,
+    backgroundColor: 'rgba(255, 255, 255, .4)',
+
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, .45) !important',
+    },
   },
 }));
 
-export default function HeroBullets() {
-  const { classes } = useStyles();
+export default function HeroImageBackground() {
+  const { classes, cx } = useStyles();
+
   return (
-    <div>
-      <Container>
-        <div className={classes.inner}>
-          <div className={classes.content}>
-            <Title className={classes.title}>
-              A <span className={classes.highlight}>modern</span> React <br />{" "}
-              components library
-            </Title>
-            <Text color="dimmed" mt="md">
-              Build fully functional accessible web applications faster than
-              ever – Mantine includes more than 120 customizable components and
-              hooks to cover you in any situation
-            </Text>
+    <div className={classes.wrapper}>
+      <Overlay color="#000" opacity={0.65} zIndex={1} />
 
-            <List
-              mt={30}
-              spacing="sm"
-              size="sm"
-              icon={
-                <ThemeIcon size={20} radius="xl">
-                  <IconCheck size={rem(12)} stroke={1.5} />
-                </ThemeIcon>
-              }
-            >
-              <List.Item>
-                <b>TypeScript based</b> – build type safe applications, all
-                components and hooks export types
-              </List.Item>
-              <List.Item>
-                <b>Free and open source</b> – all packages have MIT license, you
-                can use Mantine in any project
-              </List.Item>
-              <List.Item>
-                <b>No annoying focus ring</b> – focus ring will appear only when
-                user navigates with keyboard
-              </List.Item>
-            </List>
+      <div className={classes.inner}>
+        <Title className={classes.title}>
+          Automated AI code reviews for{' '}
+          <Text component="span" inherit className={classes.highlight}>
+            any stack
+          </Text>
+        </Title>
 
-            <Group mt={30}>
-              <Button radius="xl" size="md" className={classes.control}>
-                Get started
-              </Button>
-              <Button
-                variant="default"
-                radius="xl"
-                size="md"
-                className={classes.control}
-              >
-                Source code
-              </Button>
-            </Group>
-          </div>
-          <Image alt="" src={image.src} className={classes.image} />
+        <Container size={640}>
+          <Text size="lg" className={classes.description}>
+            Build more reliable software with AI companion. AI is also trained to detect lazy
+            developers who do nothing and just complain on Twitter.
+          </Text>
+        </Container>
+
+        <div className={classes.controls}>
+          <Button className={classes.control} variant="white" size="lg">
+            Get started
+          </Button>
+          <Button className={cx(classes.control, classes.secondaryControl)} size="lg">
+            Live demo
+          </Button>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

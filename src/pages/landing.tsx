@@ -1,8 +1,5 @@
 import React from "react";
 import { signIn } from "next-auth/react";
-import Image from "next/image";
-import pic from "../assets/notes.svg";
-import { motion } from "framer-motion";
 import Features from "../components/Features";
 import Home from "../components/Homesection";
 
@@ -19,12 +16,12 @@ function landing() {
         </h1>
         <button
           onClick={() => signIn()}
-          className="border px-4 py-2 rounded-xl"
+          className="border px-4 py-2 m-2 rounded-xl"
         >
           Sign In
         </button>
       </section>
-      <section className="text-center space-y-8">
+      <section className="h-full w-full">
         <Home/>
         <Features />
       </section>
