@@ -2,6 +2,8 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import Features from "../components/Features";
 import Home from "../components/Homesection";
+import FooterSimple from "../components/Footer";
+import Footer from "../components/Footer";
 
 function landing() {
   const textVariants = {
@@ -25,6 +27,7 @@ function landing() {
         <Home/>
         <Features />
       </section>
+      <Footer />
     </section>
   );
 }

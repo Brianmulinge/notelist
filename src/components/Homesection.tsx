@@ -1,23 +1,31 @@
-import { Title, Text, Container, Button, Overlay, createStyles, rem } from '@mantine/core';
+import {
+  Title,
+  Text,
+  Container,
+  Button,
+  Overlay,
+  createStyles,
+  rem,
+} from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    position: 'relative',
+    position: "relative",
     paddingTop: rem(180),
     paddingBottom: rem(130),
     backgroundImage:
-      'url(https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      "url(https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80)",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
 
-    [theme.fn.smallerThan('xs')]: {
+    [theme.fn.smallerThan("xs")]: {
       paddingTop: rem(80),
       paddingBottom: rem(50),
     },
   },
 
   inner: {
-    position: 'relative',
+    position: "relative",
     zIndex: 1,
   },
 
@@ -29,12 +37,12 @@ const useStyles = createStyles((theme) => ({
     paddingRight: theme.spacing.md,
     color: theme.white,
     marginBottom: theme.spacing.xs,
-    textAlign: 'center',
+    textAlign: "center",
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 
-    [theme.fn.smallerThan('xs')]: {
+    [theme.fn.smallerThan("xs")]: {
       fontSize: rem(28),
-      textAlign: 'left',
+      textAlign: "left",
     },
   },
 
@@ -44,23 +52,23 @@ const useStyles = createStyles((theme) => ({
 
   description: {
     color: theme.colors.gray[0],
-    textAlign: 'center',
+    textAlign: "center",
 
-    [theme.fn.smallerThan('xs')]: {
+    [theme.fn.smallerThan("xs")]: {
       fontSize: theme.fontSizes.md,
-      textAlign: 'left',
+      textAlign: "left",
     },
   },
 
   controls: {
     marginTop: `calc(${theme.spacing.xl} * 1.5)`,
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
 
-    [theme.fn.smallerThan('xs')]: {
-      flexDirection: 'column',
+    [theme.fn.smallerThan("xs")]: {
+      flexDirection: "column",
     },
   },
 
@@ -68,12 +76,12 @@ const useStyles = createStyles((theme) => ({
     height: rem(42),
     fontSize: theme.fontSizes.md,
 
-    '&:not(:first-of-type)': {
+    "&:not(:first-of-type)": {
       marginLeft: theme.spacing.md,
     },
 
-    [theme.fn.smallerThan('xs')]: {
-      '&:not(:first-of-type)': {
+    [theme.fn.smallerThan("xs")]: {
+      "&:not(:first-of-type)": {
         marginTop: theme.spacing.md,
         marginLeft: 0,
       },
@@ -82,10 +90,10 @@ const useStyles = createStyles((theme) => ({
 
   secondaryControl: {
     color: theme.white,
-    backgroundColor: 'rgba(255, 255, 255, .4)',
+    backgroundColor: "rgba(255, 255, 255, .4)",
 
-    '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, .45) !important',
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, .45) !important",
     },
   },
 }));
@@ -99,7 +107,7 @@ export default function HeroImageBackground() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Automated AI code reviews for{' '}
+          Automated AI code reviews for{" "}
           <Text component="span" inherit className={classes.highlight}>
             any stack
           </Text>
@@ -107,17 +115,18 @@ export default function HeroImageBackground() {
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Build more reliable software with AI companion. AI is also trained to detect lazy
-            developers who do nothing and just complain on Twitter.
+            Build more reliable software with AI companion. AI is also trained
+            to detect lazy developers who do nothing and just complain on
+            Twitter.
           </Text>
         </Container>
 
         <div className={classes.controls}>
-          <Button className={classes.control} variant="white" size="lg">
-            Get started
-          </Button>
-          <Button className={cx(classes.control, classes.secondaryControl)} size="lg">
-            Live demo
+          <Button
+            className={cx(classes.control, classes.secondaryControl)}
+            size="lg"
+          >
+            Sign In
           </Button>
         </div>
       </div>
