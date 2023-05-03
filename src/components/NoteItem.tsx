@@ -21,7 +21,7 @@ export default function NoteItem({
     <div className="border rounded-lg h-full w-full p-4">
       <div className="">
         <h1 className="font-semibold text-lg py-2">{note.title}</h1>
-        <h1>{note.content}</h1>
+        <h2 className="text-lg">{note.content}</h2>
       </div>
       <div className="flex justify-end p-2">
         <button onClick={handleDelete}>

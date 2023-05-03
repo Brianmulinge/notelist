@@ -3,7 +3,6 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import { Analytics } from "@vercel/analytics/react";
 import { MantineProvider } from "@mantine/core";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,7 +20,6 @@ const App: AppType = ({ Component, pageProps }: AppProps) => {
       >
         <main className={inter.className}>
           <Component {...pageProps} />
-          <Analytics />
         </main>
       </MantineProvider>
     </SessionProvider>

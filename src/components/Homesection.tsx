@@ -107,9 +107,9 @@ export default function HeroImageBackground() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Automated AI code reviews for{" "}
+        The best way to keep your notes in{" "}
           <Text component="span" inherit className={classes.highlight}>
-            any stack
+          check
           </Text>
         </Title>
 
