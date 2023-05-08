@@ -3,18 +3,26 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import { Analytics } from "@vercel/analytics/react";
+import { MantineProvider } from "@mantine/core";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const App: AppType = ({ Component, pageProps }: AppProps) => {
   return (
-    <main className={inter.className}>
-      <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
-        <Analytics />
-      </SessionProvider>
-    </main>
+    <SessionProvider session={pageProps.session}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "light",
+        }}
+      >
+        <main className={inter.className}>
+          <Component {...pageProps} />
+        </main>
+      </MantineProvider>
+    </SessionProvider>
   );
 };
 

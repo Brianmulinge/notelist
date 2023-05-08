@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { trpc } from "../utils/trpc";
 
-
 interface EditorProps {
   isOpen: boolean;
 }
@@ -26,11 +25,13 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 ${visibilityStyle}`}
+        className={`fixed inset-0 bg-neutral-900 bg-opacity-70 ${visibilityStyle}`}
         style={{ backdropFilter: "blur(5px)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`flex items-center h-full w-full justify-center ${visibilityStyle}`}>
+        <div
+          className={`flex items-center h-full w-full justify-center ${visibilityStyle}`}
+        >
           <div className="w-full h-auto p-4 rounded-lg border mx-6 my-4">
             <form onSubmit={handleSubmit}>
               <h1 className="text-center font-semibold text-xl py-2">
@@ -51,7 +52,7 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
               <button
                 disabled={!title || !content}
                 type="submit"
-                className="border rounded-full px-6 py-2 font-semibold border-gray-800"
+                className="border border-white rounded-full px-6 py-2 font-semibold "
               >
                 Add Note
               </button>
