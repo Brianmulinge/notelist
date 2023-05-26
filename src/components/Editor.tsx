@@ -25,15 +25,15 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-neutral-900 bg-opacity-70 ${visibilityStyle}`}
+        className={` fixed inset-0 bg-neutral-900 bg-opacity-70 ${visibilityStyle}`}
         style={{ backdropFilter: "blur(5px)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <div
           className={`flex items-center h-full w-full justify-center ${visibilityStyle}`}
         >
-          <div className="w-full h-auto p-4 rounded-lg border mx-6 my-4">
-            <form onSubmit={handleSubmit}>
+          <div className="">
+            <form className="container w-full h-auto p-4 rounded-lg border my-4" onSubmit={handleSubmit}>
               <h1 className="text-center font-semibold text-xl py-2">
                 Create New Note
               </h1>
@@ -47,7 +47,7 @@ const Editor: React.FC<EditorProps> = ({ isOpen }) => {
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="border rounded-lg w-full p-2"
+                className="border rounded-lg w-full p-2 h-40"
               />
               <button
                 disabled={!title || !content}
