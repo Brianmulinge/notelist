@@ -23,6 +23,14 @@ export const authOptions: NextAuthOptions = {
     async redirect({ baseUrl }) {
       return baseUrl;
     },
+    async jwt({ token, user, account }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user?.id;
+        account.access_token = account.refresh_token;
+      }
+      return token;
+    },
   },
 
   secret: process.env.SECRET,
@@ -32,13 +40,13 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
-      authorization:{
+      authorization: {
         params: {
           access_type: "offline",
           prompt: "consent",
           response_type: "code",
         },
-      }
+      },
     }),
   ],
 };
